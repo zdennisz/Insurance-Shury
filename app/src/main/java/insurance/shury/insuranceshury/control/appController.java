@@ -1,6 +1,7 @@
 package insurance.shury.insuranceshury.control;
 
 import android.content.Context;
+import android.util.JsonReader;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -8,32 +9,52 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.util.JsonWriter;
+
 import insurance.shury.insuranceshury.model.DB;
+import insurance.shury.insuranceshury.model.Developer;
 import insurance.shury.insuranceshury.model.Insurance;
 import insurance.shury.insuranceshury.model.InsuranceType;
 import insurance.shury.insuranceshury.model.PersonalInsurance;
 import insurance.shury.insuranceshury.model.User;
 
+
 public class appController {
+
+    //------------------------------------- Singleton ------------------------------------------
+    private static appController instance = null;
+
+    private appController() {
+    }
+
+    public static appController getAppController() {
+        if (instance == null) {
+            instance = new appController();
+        }
+        return instance;
+    }
+
+    //-------------------------------- App Controller Parameters -------------------------------------
+
+
     private static final String FILE_NAME = "users.txt";
-    private DB dbInstance;
+    private static final String FILE_DEVELOPERS = "developers.json";
+    private DB dbInstance = DB.getDB();
     private Context context;
 
     public void setContext(Context context) {
         this.context = context;
     }
-
-
-    public appController() {
-        dbInstance = DB.getInstance();
-    }
-
 
     public HashMap getAllUser() {
         return this.dbInstance.getUserHashMap();
@@ -46,7 +67,6 @@ public class appController {
     public User getUser(int id) {
         return this.dbInstance.getUserHashMap().get(id);
     }
-
 
     public void addUser(String firstName, String lastName, String date, InsuranceType type, String remarks) {
         boolean foundUser = false;
@@ -65,6 +85,9 @@ public class appController {
         newUser.personalInsurance.add(new PersonalInsurance(new Insurance(type), date, remarks));
         dbRef.put(location, newUser);
     }
+
+
+    //-------------------------------- Users TXT Writer -------------------------------------
 
     public void saveToFile(String firstName, String lastName, String date, InsuranceType type, String remarks) {
         String comma = ",";
@@ -98,8 +121,9 @@ public class appController {
                 }
             }
         }
-
     }
+
+    //-------------------------------- Users TXT Reader -------------------------------------
 
     public void importUsers() {
         FileInputStream fis = null;
@@ -138,5 +162,78 @@ public class appController {
         // dbInstance.setDesignedCreatedHashMap();
         //designedCreatedHashMap -load from file
     }
+
+
+
+
+    //-------------------------------- Developer JSON Writer -------------------------------------
+
+    public void writeJsonStream(OutputStream out, List<Developer> developers) throws IOException {
+        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
+        writer.setIndent("  ");
+        writeMessagesArray(writer, developers);
+        writer.close();
+    }
+
+    public void writeMessagesArray(JsonWriter writer, List<Developer> developers) throws IOException {
+        writer.beginArray();
+        for (Developer d : developers) {
+            writeMessage(writer, d);
+        }
+        writer.endArray();
+    }
+
+    public void writeMessage(JsonWriter writer, Developer developer) throws IOException {
+        writer.beginObject();
+
+        writer.name("name");
+        writeDeveloper(writer, developer);
+        writer.endObject();
+    }
+
+    public void writeDeveloper(JsonWriter writer, Developer developer) throws IOException {
+        writer.beginObject();
+        writer.name("name").value(developer.getName());
+        writer.endObject();
+    }
+
+
+    //-------------------------------- Developer JSON Reader -------------------------------------
+
+    public List<Developer> readJsonStream(InputStream in) throws IOException {
+        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readDevelopersArray(reader);
+        } finally {
+            reader.close();
+        }
+    }
+
+    public List<Developer> readDevelopersArray(JsonReader reader) throws IOException {
+        List<Developer> developers = new ArrayList<Developer>();
+
+        reader.beginArray();
+        while (reader.hasNext()) {
+            developers.add(readDeveloper(reader));
+        }
+        reader.endArray();
+        return developers;
+    }
+
+    public Developer readDeveloper(JsonReader reader) throws IOException {
+        String developerName = null;
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("id")) {
+
+                developerName = reader.nextString();
+            }
+        }
+        reader.endObject();
+        return new Developer(developerName);
+    }
+
 
 }

@@ -19,15 +19,15 @@ public class Home extends AppCompatActivity {
     private Button viewBtn;
     private Button buyBtn;
     private TextView designerCreatorTv;
-    appController apControl = new appController();
+    //appController apControl = new appController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //import users
-        apControl.setContext(this.getApplicationContext());
-        apControl.importUsers();
+        appController.getAppController().setContext(this.getApplicationContext());
+        appController.getAppController().importUsers();
         //import designer and creator tag
         //apControl.importDesingerCreator();
         buyBtn = findViewById(R.id.buy_Btn);
@@ -38,12 +38,15 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, BuyInsurance.class));
+                finish();
             }
         });
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, History.class));
+                finish();
+
             }
         });
     }
@@ -52,7 +55,7 @@ public class Home extends AppCompatActivity {
     public void parseDesignerCreator() {
         String names = "";
         HashMap<Integer, String> designerCreator;
-        designerCreator = apControl.getDesignerCreator();
+        designerCreator =  appController.getAppController().getDesignerCreator();
         for (Map.Entry<Integer, String> entry : designerCreator.entrySet()) {
             String value = entry.getValue();
             names += value + " \n";

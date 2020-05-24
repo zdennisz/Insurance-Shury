@@ -32,7 +32,7 @@ public class BuyInsurance extends AppCompatActivity {
     private Button addInsuranceButton;
     private InsuranceType type;
     private Boolean checkedOne = false;
-    appController apControl = new appController();
+    //appController apControl = new appController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class BuyInsurance extends AppCompatActivity {
         apartamentInsurance = findViewById(R.id.switch_apartamentInssurance);
         addInsuranceButton = findViewById(R.id.addInsurance_btn);
         et_date.setInputType(InputType.TYPE_NULL);
-        apControl.setContext(getApplicationContext());
+        appController.getAppController().setContext(getApplicationContext());
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,9 +124,10 @@ public class BuyInsurance extends AppCompatActivity {
                 if (!(date.isEmpty() && !(firstName.isEmpty())) && !(lastName.isEmpty()) && type != null && !(remarks.isEmpty()) && (checkedOne)) {
                     //go back to the beggining and send the data
                     Toast.makeText(BuyInsurance.this, "Fields are filled", Toast.LENGTH_LONG).show();
-                    apControl.addUser(firstName, lastName, date, type, remarks);
-                    apControl.saveToFile(firstName, lastName, date, type, remarks);
+                    appController.getAppController().addUser(firstName, lastName, date, type, remarks);
+                    appController.getAppController().saveToFile(firstName, lastName, date, type, remarks);
                     startActivity(new Intent(BuyInsurance.this, Home.class));
+                    finish();
 
 
                 } else {
