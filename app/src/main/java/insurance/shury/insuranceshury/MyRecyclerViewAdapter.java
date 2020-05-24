@@ -1,0 +1,96 @@
+package insurance.shury.insuranceshury;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+
+
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
+    private ArrayList<RecyclerViewUser> mData=new ArrayList<RecyclerViewUser>();
+    private LayoutInflater mInflater;
+    private ItemClickListener mClickListener;
+
+    MyRecyclerViewAdapter(Context context, HashMap<Integer,User> data) {
+        this.mInflater = LayoutInflater.from(context);
+        for (int i = 0; i < data.size(); i++) {
+            for (int j=0;j<data.get(i).personalInsurance.size();j++){
+                RecyclerViewUser user=new RecyclerViewUser();
+                user.setUserFirstName(data.get(i).getFirstName());
+                user.setUserLastName(data.get(i).getLastName());
+                user.setDateOfPurchase(data.get(i).personalInsurance.get(j).getDateOfPurchase());
+                user.setUserRemarks(data.get(i).personalInsurance.get(j).getRemarks());
+                mData.add(user);
+            }
+        }
+
+    }
+    // inflates the row layout from xml when needed
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.recyclerview_row, parent, false);
+        return new ViewHolder(view);
+    }
+
+    // binds the data to the TextView in each row
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        RecyclerViewUser person = mData.get(position);
+        holder.name.setText(person.getUserFirstName());
+        holder.familyname.setText(person.getUserLastName());
+        holder.date.setText(person.getDateOfPurchase());
+        String remarks="Click here to see Remarks";
+        holder.remarks.setText(remarks);
+
+    }
+
+    // total number of rows
+    @Override
+    public int getItemCount() {
+        return mData.size();
+    }
+    // stores and recycles views as they are scrolled off screen
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView name;
+        TextView familyname;
+        TextView date;
+        TextView remarks;
+        ViewHolder(View itemView) {
+            super(itemView);
+            name = itemView.findViewById(R.id.rv_firstName);
+            familyname=itemView.findViewById(R.id.rv_lastName);
+            date=itemView.findViewById(R.id.rv_date);
+            remarks=itemView.findViewById(R.id.rv_remarks);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+        }
+    }
+
+    // convenience method for getting data at click position
+    RecyclerViewUser getItem(int id) {
+        return mData.get(id);
+
+    }
+
+    // allows clicks events to be caught
+    void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
+    }
+}

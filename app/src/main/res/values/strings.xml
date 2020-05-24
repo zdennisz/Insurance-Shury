@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Insurance Shury</string>
+    <string name="buy">Buy</string>
+    <string name="view">View</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="buyInsurance">Buy Insurance</string>
+    <string name="remarks">Remarks</string>
+    <string name="date">Date</string>
+    <string name="life">Life</string>
+    <string name="car">Car</string>
+    <string name="apartment">Apartment</string>
+    <string name="disability">Disability</string>
+    <string name="name">Name</string>
+    <string name="familyName">Family Name</string>
+</resources>
