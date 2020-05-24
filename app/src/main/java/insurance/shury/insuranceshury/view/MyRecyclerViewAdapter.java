@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,16 +16,16 @@ import insurance.shury.insuranceshury.model.RecyclerViewUser;
 import insurance.shury.insuranceshury.model.User;
 
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
-    private ArrayList<RecyclerViewUser> mData=new ArrayList<RecyclerViewUser>();
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+    private ArrayList<RecyclerViewUser> mData = new ArrayList<RecyclerViewUser>();
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     MyRecyclerViewAdapter(Context context, HashMap<Integer, User> data) {
         this.mInflater = LayoutInflater.from(context);
         for (int i = 0; i < data.size(); i++) {
-            for (int j=0;j<data.get(i).personalInsurance.size();j++){
-                RecyclerViewUser user=new RecyclerViewUser();
+            for (int j = 0; j < data.get(i).personalInsurance.size(); j++) {
+                RecyclerViewUser user = new RecyclerViewUser();
                 user.setUserFirstName(data.get(i).getFirstName());
                 user.setUserLastName(data.get(i).getLastName());
                 user.setDateOfPurchase(data.get(i).personalInsurance.get(j).getDateOfPurchase());
@@ -34,6 +35,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         }
 
     }
+
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,7 +50,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.name.setText(person.getUserFirstName());
         holder.familyname.setText(person.getUserLastName());
         holder.date.setText(person.getDateOfPurchase());
-        String remarks="Remarks";
+        String remarks = "Remarks";
         holder.remarks.setText(remarks);
 
     }
@@ -58,18 +60,20 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     public int getItemCount() {
         return mData.size();
     }
+
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         TextView familyname;
         TextView date;
         TextView remarks;
+
         ViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.rv_firstName);
-            familyname=itemView.findViewById(R.id.rv_lastName);
-            date=itemView.findViewById(R.id.rv_date);
-            remarks=itemView.findViewById(R.id.rv_remarks);
+            familyname = itemView.findViewById(R.id.rv_lastName);
+            date = itemView.findViewById(R.id.rv_date);
+            remarks = itemView.findViewById(R.id.rv_remarks);
             itemView.setOnClickListener(this);
         }
 

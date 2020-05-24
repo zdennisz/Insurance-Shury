@@ -10,10 +10,10 @@ import androidx.fragment.app.DialogFragment;
 import insurance.shury.insuranceshury.R;
 
 public class RemarksDialog extends DialogFragment {
-    private String message="Some Remarks";
+    private String message = "Some Remarks";
 
-    public void setMessage(String messageContent){
-        this.message=messageContent;
+    public void setMessage(String messageContent) {
+        this.message = messageContent;
     }
 
     @Override

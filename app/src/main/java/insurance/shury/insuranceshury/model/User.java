@@ -42,5 +42,4 @@ public class User {
     public ArrayList<PersonalInsurance> personalInsurance = new ArrayList<PersonalInsurance>();
 
 
-
 }

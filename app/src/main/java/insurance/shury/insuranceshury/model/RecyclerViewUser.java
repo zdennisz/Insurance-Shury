@@ -36,6 +36,7 @@ public class RecyclerViewUser {
     public void setUserRemarks(String userRemarks) {
         this.userRemarks = userRemarks;
     }
+
     private String userLastName;
     private String userFirstName;
     private String dateOfPurchase;

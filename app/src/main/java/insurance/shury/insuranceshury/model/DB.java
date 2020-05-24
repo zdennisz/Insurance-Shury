@@ -13,15 +13,16 @@ public class DB {
         this.designedCreatedHashMap = designedCreatedHashMap;
     }
 
-    private HashMap<Integer,User> userHashMap=new HashMap<Integer,User>();
-    private HashMap<Integer,String> designedCreatedHashMap=new HashMap<Integer,String>();
-    private DB(){
+    private HashMap<Integer, User> userHashMap = new HashMap<Integer, User>();
+    private HashMap<Integer, String> designedCreatedHashMap = new HashMap<Integer, String>();
+
+    private DB() {
 
     }
 
     public static DB getInstance() {
-        if(instance==null){
-            instance=new DB();
+        if (instance == null) {
+            instance = new DB();
         }
         return instance;
     }
@@ -34,9 +35,6 @@ public class DB {
     public HashMap<Integer, String> getDesignedCreatedHashMap() {
         return designedCreatedHashMap;
     }
-
-
-
 
 
 }

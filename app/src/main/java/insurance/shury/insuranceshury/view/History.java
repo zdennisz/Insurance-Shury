@@ -10,10 +10,11 @@ import android.view.View;
 import insurance.shury.insuranceshury.R;
 import insurance.shury.insuranceshury.control.appController;
 
-public class History extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener{
+public class History extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
     private static final String TAG = "History";
     MyRecyclerViewAdapter adapter;
-    appController apControl=new appController();
+    appController apControl = new appController();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +28,11 @@ public class History extends AppCompatActivity  implements MyRecyclerViewAdapter
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
+
     //open the alert dialog
     @Override
     public void onItemClick(View view, int position) {
-        RemarksDialog rD=new RemarksDialog();
+        RemarksDialog rD = new RemarksDialog();
         rD.setMessage((adapter.getItem(position).getUserRemarks()));
         rD.show(getSupportFragmentManager(), "Dialog");
 

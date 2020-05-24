@@ -13,12 +13,12 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@drawable/recyclerview_title"
         app:layout_constraintBottom_toTopOf="@+id/rvUserTable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/recyclerview_title"
 
         >
 
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rancho"
             android:text="@string/familyName"
-            android:textSize="18sp"
             android:textColor="@color/colorFont"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.173"

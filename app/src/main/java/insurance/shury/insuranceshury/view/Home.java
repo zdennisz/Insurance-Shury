@@ -19,7 +19,8 @@ public class Home extends AppCompatActivity {
     private Button viewBtn;
     private Button buyBtn;
     private TextView designerCreatorTv;
-    appController apControl=new appController();
+    appController apControl = new appController();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,32 +30,32 @@ public class Home extends AppCompatActivity {
         apControl.importUsers();
         //import designer and creator tag
         //apControl.importDesingerCreator();
-        buyBtn=findViewById(R.id.buy_Btn);
-        viewBtn=findViewById(R.id.view_Btn);
-        designerCreatorTv=findViewById(R.id.designedCreated_tv);
+        buyBtn = findViewById(R.id.buy_Btn);
+        viewBtn = findViewById(R.id.view_Btn);
+        designerCreatorTv = findViewById(R.id.designedCreated_tv);
         //parseDesignerCreator();
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this,BuyInsurance.class));
+                startActivity(new Intent(Home.this, BuyInsurance.class));
             }
         });
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Home.this,History.class));
+                startActivity(new Intent(Home.this, History.class));
             }
         });
     }
 
 
-    public void parseDesignerCreator(){
-        String names="";
-        HashMap<Integer,String> designerCreator;
-        designerCreator=apControl.getDesignerCreator();
-        for(Map.Entry<Integer,String> entry:designerCreator.entrySet()){
+    public void parseDesignerCreator() {
+        String names = "";
+        HashMap<Integer, String> designerCreator;
+        designerCreator = apControl.getDesignerCreator();
+        for (Map.Entry<Integer, String> entry : designerCreator.entrySet()) {
             String value = entry.getValue();
-            names+=value+" \n";
+            names += value + " \n";
         }
         designerCreatorTv.setText(names);
     }
