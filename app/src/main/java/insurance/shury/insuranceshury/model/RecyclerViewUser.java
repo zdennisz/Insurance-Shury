@@ -1,7 +1,5 @@
 package insurance.shury.insuranceshury.model;
 
-import java.util.Date;
-
 public class RecyclerViewUser {
 
     //------------------------------------- Parameters ------------------------------------------

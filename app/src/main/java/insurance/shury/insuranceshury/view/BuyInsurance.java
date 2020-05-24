@@ -3,6 +3,7 @@ package insurance.shury.insuranceshury.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -31,24 +32,26 @@ public class BuyInsurance extends AppCompatActivity {
     private Switch apartamentInsurance;
     private Button addInsuranceButton;
     private InsuranceType type;
+    private String firstName;
+    private String lastName;
+    private String date;
+    private String remarks;
     private Boolean checkedOne = false;
-    //appController apControl = new appController();
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = ApplicationContextProvider.getContext();
+
+
         setContentView(R.layout.activity_buy_insurance);
-        et_date = findViewById(R.id.userDateOfPurchase_et);
-        et_remarks = findViewById(R.id.userRemarks_et);
-        et_firstName = findViewById(R.id.userFirstName_et);
-        et_lastName = findViewById(R.id.userLastName_et);
-        carInsurance = findViewById(R.id.switch_carInsurance);
-        lifeInsurance = findViewById(R.id.switch_LifeInsurance);
-        disabilityInsurance = findViewById(R.id.switch_disabilityInsurance);
-        apartamentInsurance = findViewById(R.id.switch_apartamentInssurance);
-        addInsuranceButton = findViewById(R.id.addInsurance_btn);
-        et_date.setInputType(InputType.TYPE_NULL);
         appController.getAppController().setContext(getApplicationContext());
+
+        initBuyInsuranceView();
+
+        et_date.setInputType(InputType.TYPE_NULL);
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,35 +110,68 @@ public class BuyInsurance extends AppCompatActivity {
                 type = InsuranceType.APARTAMENT;
             }
         });
+
+
         addInsuranceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check if all are filled
-                //check if someone is not chechked
-                String date = et_date.getText().toString();
-                String firstName = et_firstName.getText().toString();
-                String lastName = et_lastName.getText().toString();
-                String remarks = et_remarks.getText().toString();
-                if (carInsurance.isChecked() || lifeInsurance.isChecked() || disabilityInsurance.isChecked() || apartamentInsurance.isChecked()) {
-                    checkedOne = true;
-                } else {
-                    checkedOne = false;
-                }
-                if (!(date.isEmpty() && !(firstName.isEmpty())) && !(lastName.isEmpty()) && type != null && !(remarks.isEmpty()) && (checkedOne)) {
+
+                firstName = et_firstName.getText().toString();
+                lastName = et_lastName.getText().toString();
+                date = et_date.getText().toString();
+                remarks = et_remarks.getText().toString();
+
+                boolean isValid = isBuyInsuranceValid();
+
+                if (isValid) {
+
                     //go back to the beggining and send the data
-                    Toast.makeText(BuyInsurance.this, "Fields are filled", Toast.LENGTH_LONG).show();
                     appController.getAppController().addUser(firstName, lastName, date, type, remarks);
                     appController.getAppController().saveToFile(firstName, lastName, date, type, remarks);
+
                     startActivity(new Intent(BuyInsurance.this, Home.class));
                     finish();
 
-
-                } else {
-                    Toast.makeText(BuyInsurance.this, "Please fill all the fields !", Toast.LENGTH_LONG).show();
                 }
-
 
             }
         });
     }
+
+
+    public void initBuyInsuranceView() {
+
+        et_date = findViewById(R.id.userDateOfPurchase_et);
+        et_remarks = findViewById(R.id.userRemarks_et);
+        et_firstName = findViewById(R.id.userFirstName_et);
+        et_lastName = findViewById(R.id.userLastName_et);
+        carInsurance = findViewById(R.id.switch_carInsurance);
+        lifeInsurance = findViewById(R.id.switch_LifeInsurance);
+        disabilityInsurance = findViewById(R.id.switch_disabilityInsurance);
+        apartamentInsurance = findViewById(R.id.switch_apartamentInssurance);
+        addInsuranceButton = findViewById(R.id.addInsurance_btn);
+
+    }
+
+
+    public boolean isBuyInsuranceValid() {
+
+        //check if someone is not checked
+        if (carInsurance.isChecked() || lifeInsurance.isChecked() || disabilityInsurance.isChecked() || apartamentInsurance.isChecked()) {
+            checkedOne = true;
+        } else {
+            checkedOne = false;
+        }
+
+        //check if all are filled
+        if ((date.isEmpty() || (firstName.isEmpty())) || (lastName.isEmpty()) || type == null || (remarks.isEmpty()) || (!checkedOne)) {
+            Toast.makeText(BuyInsurance.this, "Please fill all the fields!", Toast.LENGTH_LONG).show();
+            return false;
+
+        } else {
+            Toast.makeText(BuyInsurance.this, "Fields are filled", Toast.LENGTH_LONG).show();
+            return true;
+        }
+    }
+
 }

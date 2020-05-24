@@ -13,7 +13,6 @@ import insurance.shury.insuranceshury.control.appController;
 public class History extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
     private static final String TAG = "History";
     MyRecyclerViewAdapter adapter;
-    //appController apControl = new appController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +22,11 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
 
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvUserTable);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MyRecyclerViewAdapter(this,  appController.getAppController().getAllUser());
-        adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setClickListener(this);
+
     }
 
     //open the alert dialog

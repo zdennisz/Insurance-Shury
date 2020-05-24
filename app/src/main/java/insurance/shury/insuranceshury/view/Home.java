@@ -19,7 +19,6 @@ public class Home extends AppCompatActivity {
     private Button viewBtn;
     private Button buyBtn;
     private TextView designerCreatorTv;
-    //appController apControl = new appController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +37,14 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, BuyInsurance.class));
-                finish();
+                //finish();
             }
         });
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, History.class));
-                finish();
+               // finish();
 
             }
         });
