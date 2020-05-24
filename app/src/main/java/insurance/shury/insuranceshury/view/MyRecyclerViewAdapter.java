@@ -48,7 +48,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.name.setText(person.getUserFirstName());
         holder.familyname.setText(person.getUserLastName());
         holder.date.setText(person.getDateOfPurchase());
-        String remarks="Click here to see Remarks";
+        String remarks="Remarks";
         holder.remarks.setText(remarks);
 
     }

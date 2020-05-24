@@ -6,4 +6,5 @@
     <color name="colorButton">#565CFE</color>
     <color name="colorFont">#FFFFFF</color>
     <color name="datePickerColor">#EE4D4D</color>
+    <color name="remarks">#EE4D4D</color>
 </resources>
