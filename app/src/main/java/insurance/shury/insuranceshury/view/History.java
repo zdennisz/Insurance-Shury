@@ -1,16 +1,14 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import java.util.ArrayList;
+import insurance.shury.insuranceshury.R;
+import insurance.shury.insuranceshury.control.appController;
 
 public class History extends AppCompatActivity  implements MyRecyclerViewAdapter.ItemClickListener{
     private static final String TAG = "History";

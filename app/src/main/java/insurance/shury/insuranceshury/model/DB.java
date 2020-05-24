@@ -1,6 +1,4 @@
-package insurance.shury.insuranceshury;
-
-import android.content.SharedPreferences;
+package insurance.shury.insuranceshury.model;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import insurance.shury.insuranceshury.R;
+import insurance.shury.insuranceshury.control.appController;
 
 public class Home extends AppCompatActivity {
 

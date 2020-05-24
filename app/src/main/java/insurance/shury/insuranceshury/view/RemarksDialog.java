@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+
+import insurance.shury.insuranceshury.R;
 
 public class RemarksDialog extends DialogFragment {
     private String message="Some Remarks";

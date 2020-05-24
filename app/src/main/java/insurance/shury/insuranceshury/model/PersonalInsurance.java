@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.model;
 
 public class PersonalInsurance {
     public PersonalInsurance(Insurance insurance, String dateOfPurchase, String remarks) {

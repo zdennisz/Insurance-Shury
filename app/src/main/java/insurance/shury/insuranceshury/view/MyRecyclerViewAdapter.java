@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
+
+import insurance.shury.insuranceshury.R;
+import insurance.shury.insuranceshury.model.RecyclerViewUser;
+import insurance.shury.insuranceshury.model.User;
 
 
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>  {
@@ -19,7 +20,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
-    MyRecyclerViewAdapter(Context context, HashMap<Integer,User> data) {
+    MyRecyclerViewAdapter(Context context, HashMap<Integer, User> data) {
         this.mInflater = LayoutInflater.from(context);
         for (int i = 0; i < data.size(); i++) {
             for (int j=0;j<data.get(i).personalInsurance.size();j++){

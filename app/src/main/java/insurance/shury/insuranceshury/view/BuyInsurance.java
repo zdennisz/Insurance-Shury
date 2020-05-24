@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +14,10 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.Calendar;
+
+import insurance.shury.insuranceshury.R;
+import insurance.shury.insuranceshury.control.appController;
+import insurance.shury.insuranceshury.model.InsuranceType;
 
 public class BuyInsurance extends AppCompatActivity {
     DatePickerDialog picker;

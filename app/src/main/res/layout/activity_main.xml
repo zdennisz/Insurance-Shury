@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
 
     android:background="@drawable/ic_background"
-    tools:context=".Home">
+    tools:context=".view.Home">
 
 
     <Button

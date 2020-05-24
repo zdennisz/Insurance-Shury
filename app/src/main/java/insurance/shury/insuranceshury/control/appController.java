@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.control;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -9,12 +9,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import insurance.shury.insuranceshury.model.DB;
+import insurance.shury.insuranceshury.model.Insurance;
+import insurance.shury.insuranceshury.model.InsuranceType;
+import insurance.shury.insuranceshury.model.PersonalInsurance;
+import insurance.shury.insuranceshury.model.User;
 
 public class appController {
     private static final String FILE_NAME="users.txt";
@@ -47,7 +51,7 @@ public class appController {
 
 
 
-    public void addUser(String firstName,String lastName,String date,InsuranceType type,String remarks){
+    public void addUser(String firstName, String lastName, String date, InsuranceType type, String remarks){
         boolean foundUser=false;
         //if the user exists we add him to the hashmap
         HashMap<Integer, User>dbRef = dbInstance.getUserHashMap();

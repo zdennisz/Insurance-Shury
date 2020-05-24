@@ -1,4 +1,4 @@
-package insurance.shury.insuranceshury;
+package insurance.shury.insuranceshury.model;
 
 public class Insurance {
     public int getID() {
