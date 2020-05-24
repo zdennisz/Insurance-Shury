@@ -4,6 +4,24 @@ import java.util.ArrayList;
 
 public class User {
 
+    //------------------------------------- Constructor ------------------------------------------
+
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    //------------------------------------- Parameters ------------------------------------------
+
+    private int ID;
+
+    private String firstName;
+    private String lastName;
+
+    public ArrayList<PersonalInsurance> personalInsurance = new ArrayList<PersonalInsurance>();
+
+    //------------------------------------- Getters & Setters ------------------------------------------
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -27,19 +45,5 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-
-    private int ID;
-
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    private String firstName;
-    private String lastName;
-
-
-    public ArrayList<PersonalInsurance> personalInsurance = new ArrayList<PersonalInsurance>();
-
 
 }

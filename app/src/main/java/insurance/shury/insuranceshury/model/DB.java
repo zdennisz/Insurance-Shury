@@ -17,9 +17,19 @@ public class DB {
         }
         return instance;
     }
-    //------------------------------------- DB ------------------------------------------
 
+    //------------------------------------- Parameters ------------------------------------------
 
+    private HashMap<Integer, User> userHashMap = new HashMap<Integer, User>();
+    private HashMap<Integer, String> designedCreatedHashMap = new HashMap<Integer, String>();
+    public HashMap<Integer, User> getUserHashMap() {
+        return userHashMap;
+    }
+    public HashMap<Integer, String> getDesignedCreatedHashMap() {
+        return designedCreatedHashMap;
+    }
+
+    //------------------------------------- Getters & Setters ------------------------------------------
 
     public void setUserHashMap(HashMap<Integer, User> userHashMap) {
         this.userHashMap = userHashMap;
@@ -28,19 +38,5 @@ public class DB {
     public void setDesignedCreatedHashMap(HashMap<Integer, String> designedCreatedHashMap) {
         this.designedCreatedHashMap = designedCreatedHashMap;
     }
-
-    private HashMap<Integer, User> userHashMap = new HashMap<Integer, User>();
-    private HashMap<Integer, String> designedCreatedHashMap = new HashMap<Integer, String>();
-
-
-
-    public HashMap<Integer, User> getUserHashMap() {
-        return userHashMap;
-    }
-
-    public HashMap<Integer, String> getDesignedCreatedHashMap() {
-        return designedCreatedHashMap;
-    }
-
 
 }

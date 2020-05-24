@@ -4,6 +4,13 @@ import java.util.Date;
 
 public class RecyclerViewUser {
 
+    //------------------------------------- Parameters ------------------------------------------
+    private String userLastName;
+    private String userFirstName;
+    private String dateOfPurchase;
+    private String userRemarks;
+
+    //------------------------------------- Getters & Setters ------------------------------------------
 
     public String getUserFirstName() {
         return userFirstName;
@@ -37,8 +44,4 @@ public class RecyclerViewUser {
         this.userRemarks = userRemarks;
     }
 
-    private String userLastName;
-    private String userFirstName;
-    private String dateOfPurchase;
-    private String userRemarks;
 }

@@ -1,6 +1,20 @@
 package insurance.shury.insuranceshury.model;
 
 public class Insurance {
+
+    //------------------------------------- Constructor ------------------------------------------
+
+    public Insurance(InsuranceType insuranceType) {
+        this.insuranceType = insuranceType;
+    }
+
+    //------------------------------------- Parameters ------------------------------------------
+
+    private int ID;
+    private InsuranceType insuranceType;
+
+    //------------------------------------- Getters & Setters ------------------------------------------
+
     public int getID() {
         return ID;
     }
@@ -17,11 +31,5 @@ public class Insurance {
         this.insuranceType = insuranceType;
     }
 
-    public Insurance(InsuranceType insuranceType) {
-        this.insuranceType = insuranceType;
-    }
-
-    private int ID;
-    private InsuranceType insuranceType;
 
 }
