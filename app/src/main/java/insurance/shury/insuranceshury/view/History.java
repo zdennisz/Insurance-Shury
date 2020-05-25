@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 
+
 import insurance.shury.insuranceshury.R;
 import insurance.shury.insuranceshury.control.appController;
 
@@ -20,12 +21,9 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-
-        // data to populate the RecyclerView with
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvUserTable);
         adapter = new MyRecyclerViewAdapter(this, apControl.getAllUser());
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setClickListener(this);

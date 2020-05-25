@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,18 +24,20 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     MyRecyclerViewAdapter(Context context, HashMap<Integer, User> data) {
         this.mInflater = LayoutInflater.from(context);
-        for (int i = 0; i < data.size(); i++) {
-            for (int j = 0; j < data.get(i).personalInsurance.size(); j++) {
-                RecyclerViewUser user = new RecyclerViewUser();
-                user.setUserFirstName(data.get(i).getFirstName());
-                user.setUserLastName(data.get(i).getLastName());
+        ArrayList<RecyclerViewUser> changedValues=new ArrayList<RecyclerViewUser>();
+        ArrayList<User> temp=new ArrayList<User>(data.values());
+        for(int i=0;i<data.size();i++){
+            RecyclerViewUser user = new RecyclerViewUser();
+            user.setUserFirstName(data.get(i).getFirstName());
+            user.setUserLastName(data.get(i).getLastName());
+            for(int j=0;j<data.get(i).personalInsurance.size();j++){
                 user.setDateOfPurchase(data.get(i).personalInsurance.get(j).getDateOfPurchase());
                 user.setUserRemarks(data.get(i).personalInsurance.get(j).getRemarks());
                 user.setTypeOfInsurance(data.get(i).personalInsurance.get(j).getInsurance().getInsuranceType().name());
-                mData.add(user);
             }
+            changedValues.add(user);
         }
-
+        mData=changedValues;
     }
 
     // inflates the row layout from xml when needed
@@ -46,13 +49,19 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     // binds the data to the TextView in each row
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         RecyclerViewUser person = mData.get(position);
         holder.name.setText(person.getUserFirstName());
         holder.familyname.setText(person.getUserLastName());
         holder.date.setText(person.getDateOfPurchase());
         String remarks = "Remarks";
         holder.remarks.setText(remarks);
+        holder.remarks.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    });
 
     }
 
@@ -67,7 +76,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView name;
         TextView familyname;
         TextView date;
-        TextView remarks;
+        Button remarks;
 
         ViewHolder(View itemView) {
             super(itemView);
