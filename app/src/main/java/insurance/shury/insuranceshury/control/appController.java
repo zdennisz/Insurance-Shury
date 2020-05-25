@@ -31,33 +31,30 @@ import insurance.shury.insuranceshury.model.User;
 
 public class appController {
 
-    //------------------------------------- Singleton ------------------------------------------
-    private static appController instance = null;
+    //------------------------------------- Constructor ------------------------------------------
 
-    private appController() {
+    public appController() {
+        dbInstance = DB.getInstance();
     }
 
-    public static appController getAppController() {
-        if (instance == null) {
-            instance = new appController();
-        }
-        return instance;
-    }
-
-    //-------------------------------- App Controller Parameters -------------------------------------
+    //-------------------------------- Parameters -------------------------------------
 
 
+    private static final String FILE_DEVELOPERS = "input.json";
     private static final String FILE_NAME = "users.txt";
-    private static final String FILE_DEVELOPERS = "developers.json";
-    private DB dbInstance = DB.getDB();
+    private DB dbInstance;
     private Context context;
+
+
+    //-------------------------------- Getters & Setters -------------------------------------
 
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public HashMap getAllUser() {
-        return this.dbInstance.getUserHashMap();
+    public HashMap<Integer, User> getAllUser() {
+         return this.dbInstance.getUserHashMap();
+
     }
 
     public HashMap getDesignerCreator() {
@@ -67,6 +64,8 @@ public class appController {
     public User getUser(int id) {
         return this.dbInstance.getUserHashMap().get(id);
     }
+
+    //-------------------------------- Methods -------------------------------------
 
     public void addUser(String firstName, String lastName, String date, InsuranceType type, String remarks) {
         boolean foundUser = false;
@@ -162,8 +161,6 @@ public class appController {
         // dbInstance.setDesignedCreatedHashMap();
         //designedCreatedHashMap -load from file
     }
-
-
 
 
     //-------------------------------- Developer JSON Writer -------------------------------------

@@ -46,4 +46,13 @@ public class User {
         return lastName;
     }
 
+
+    public ArrayList<PersonalInsurance> getPersonalInsurance() {
+        return personalInsurance;
+    }
+
+    public void setPersonalInsurance(ArrayList<PersonalInsurance> personalInsurance) {
+        this.personalInsurance = personalInsurance;
+    }
+
 }

@@ -48,7 +48,7 @@
         android:id="@+id/rv_remarks"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:background="@color/remarks"
+        android:background="@color/colorButton"
         android:fontFamily="@font/rancho"
         android:textColor="@color/colorFont"
         android:textSize="18sp"

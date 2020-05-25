@@ -38,16 +38,14 @@ public class BuyInsurance extends AppCompatActivity {
     private String remarks;
     private Boolean checkedOne = false;
     private Context context;
+    appController apControl=new appController();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        context = ApplicationContextProvider.getContext();
-
-
         setContentView(R.layout.activity_buy_insurance);
-        appController.getAppController().setContext(getApplicationContext());
+        apControl.setContext(getApplicationContext());
 
         initBuyInsuranceView();
 
@@ -126,11 +124,11 @@ public class BuyInsurance extends AppCompatActivity {
                 if (isValid) {
 
                     //go back to the beggining and send the data
-                    appController.getAppController().addUser(firstName, lastName, date, type, remarks);
-                    appController.getAppController().saveToFile(firstName, lastName, date, type, remarks);
+                    apControl.addUser(firstName, lastName, date, type, remarks);
+                    apControl.saveToFile(firstName, lastName, date, type, remarks);
 
                     startActivity(new Intent(BuyInsurance.this, Home.class));
-                    finish();
+                    //finish();
 
                 }
 

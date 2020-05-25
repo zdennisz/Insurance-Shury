@@ -19,14 +19,15 @@ public class Home extends AppCompatActivity {
     private Button viewBtn;
     private Button buyBtn;
     private TextView designerCreatorTv;
+    appController apControl=new appController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //import users
-        appController.getAppController().setContext(this.getApplicationContext());
-        appController.getAppController().importUsers();
+        apControl.setContext(getApplicationContext());
+        apControl.importUsers();
         //import designer and creator tag
         //apControl.importDesingerCreator();
         buyBtn = findViewById(R.id.buy_Btn);
@@ -54,7 +55,7 @@ public class Home extends AppCompatActivity {
     public void parseDesignerCreator() {
         String names = "";
         HashMap<Integer, String> designerCreator;
-        designerCreator =  appController.getAppController().getDesignerCreator();
+        designerCreator =  apControl.getDesignerCreator();
         for (Map.Entry<Integer, String> entry : designerCreator.entrySet()) {
             String value = entry.getValue();
             names += value + " \n";

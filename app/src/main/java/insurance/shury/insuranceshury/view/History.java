@@ -11,6 +11,8 @@ import insurance.shury.insuranceshury.R;
 import insurance.shury.insuranceshury.control.appController;
 
 public class History extends AppCompatActivity implements MyRecyclerViewAdapter.ItemClickListener {
+    appController apControl=new appController();
+    private RecyclerView recyclerView;
     private static final String TAG = "History";
     MyRecyclerViewAdapter adapter;
 
@@ -18,14 +20,16 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        // data to populate the RecyclerView with
 
+        // data to populate the RecyclerView with
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvUserTable);
-        adapter = new MyRecyclerViewAdapter(this,  appController.getAppController().getAllUser());
+        adapter = new MyRecyclerViewAdapter(this, apControl.getAllUser());
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter.setClickListener(this);
+
 
     }
 
@@ -35,6 +39,5 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
         RemarksDialog rD = new RemarksDialog();
         rD.setMessage((adapter.getItem(position).getUserRemarks()));
         rD.show(getSupportFragmentManager(), "Dialog");
-
     }
 }
