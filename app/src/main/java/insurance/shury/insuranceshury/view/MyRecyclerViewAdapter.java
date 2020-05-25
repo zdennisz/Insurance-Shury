@@ -56,12 +56,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.date.setText(person.getDateOfPurchase());
         String remarks = "Remarks";
         holder.remarks.setText(remarks);
-        holder.remarks.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    });
 
     }
 
@@ -84,12 +78,13 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             familyname = itemView.findViewById(R.id.rv_lastName);
             date = itemView.findViewById(R.id.rv_date);
             remarks = itemView.findViewById(R.id.rv_remarks);
-            itemView.setOnClickListener(this);
+            remarks.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+
         }
     }
 
