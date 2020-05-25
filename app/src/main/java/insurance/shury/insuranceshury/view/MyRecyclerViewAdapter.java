@@ -30,6 +30,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 user.setUserLastName(data.get(i).getLastName());
                 user.setDateOfPurchase(data.get(i).personalInsurance.get(j).getDateOfPurchase());
                 user.setUserRemarks(data.get(i).personalInsurance.get(j).getRemarks());
+                user.setTypeOfInsurance(data.get(i).personalInsurance.get(j).getInsurance().getInsuranceType().name());
                 mData.add(user);
             }
         }

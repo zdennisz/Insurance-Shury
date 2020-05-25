@@ -40,7 +40,7 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
     @Override
     public void onItemClick(View view, int position) {
         RemarksDialog rD = new RemarksDialog();
-        rD.setMessage((adapter.getItem(position).getUserRemarks()));
+        rD.setMessage( "Remarks : "+(adapter.getItem(position).getUserRemarks())+"\nType : "+(adapter.getItem(position).getTypeOfInsurance()));
         rD.show(getSupportFragmentManager(), "Dialog");
     }
 }

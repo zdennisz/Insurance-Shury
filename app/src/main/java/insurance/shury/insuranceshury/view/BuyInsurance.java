@@ -128,9 +128,8 @@ public class BuyInsurance extends AppCompatActivity {
                 if (isValid) {
 
                     //go back to the beggining and send the data
-                    apControl.addUser(firstName, lastName, date, type, remarks);
-                    apControl.saveToFile(firstName, lastName, date, type, remarks);
-
+                    apControl.addUserToDB(firstName, lastName, date, type, remarks);
+                    apControl.saveToFile(firstName,lastName,date,type,remarks);
                     startActivity(new Intent(BuyInsurance.this, Home.class));
                     finish();
 

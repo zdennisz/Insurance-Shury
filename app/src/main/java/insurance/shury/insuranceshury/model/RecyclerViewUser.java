@@ -7,7 +7,7 @@ public class RecyclerViewUser {
     private String userFirstName;
     private String dateOfPurchase;
     private String userRemarks;
-
+    private String typeOfInsurance;
     //------------------------------------- Getters & Setters ------------------------------------------
 
     public String getUserFirstName() {
@@ -40,6 +40,14 @@ public class RecyclerViewUser {
 
     public void setUserRemarks(String userRemarks) {
         this.userRemarks = userRemarks;
+    }
+
+    public String getTypeOfInsurance() {
+        return typeOfInsurance;
+    }
+
+    public void setTypeOfInsurance(String typeOfInsurance) {
+        this.typeOfInsurance = typeOfInsurance;
     }
 
 }

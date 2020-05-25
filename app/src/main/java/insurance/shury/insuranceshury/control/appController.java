@@ -5,23 +5,20 @@ import android.util.JsonReader;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.util.JsonWriter;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,28 +61,28 @@ public class appController {
         return this.dbInstance.getDesignedCreatedHashMap();
     }
 
-    public User getUser(int id) {
-        return this.dbInstance.getUserHashMap().get(id);
-    }
 
     //-------------------------------- Methods -------------------------------------
 
-    public void addUser(String firstName, String lastName, String date, InsuranceType type, String remarks) {
-        boolean foundUser = false;
+    public void addUserToDB(String firstName, String lastName, String date, InsuranceType type, String remarks) {
         //if the user exists we add him to the hashmap
+        boolean userFound=false;
         HashMap<Integer, User> dbRef = dbInstance.getUserHashMap();
         for (Map.Entry<Integer, User> entry : dbRef.entrySet()) {
             if (entry.getValue().getLastName().equals(lastName) && entry.getValue().getFirstName().equals(firstName)) {
                 entry.getValue().personalInsurance.add(new PersonalInsurance(new Insurance(type), date, remarks));
+                userFound=true;
             }
         }
+        if(!userFound){
+            //if the user dosent exist add new entry
+            User newUser = new User(firstName, lastName);
+            int location = dbRef.size();
+            newUser.setID(location);
+            newUser.personalInsurance.add(new PersonalInsurance(new Insurance(type), date, remarks));
+            dbRef.put(location, newUser);
+        }
 
-        //if the user dosent exist add new entry
-        User newUser = new User(firstName, lastName);
-        int location = dbRef.size();
-        newUser.setID(location);
-        newUser.personalInsurance.add(new PersonalInsurance(new Insurance(type), date, remarks));
-        dbRef.put(location, newUser);
     }
 
 
@@ -128,33 +125,38 @@ public class appController {
     //-------------------------------- Users TXT Reader -------------------------------------
 
     public void importUsers() {
-        FileInputStream fis = null;
-        try {
-            fis = context.openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader br = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String text;
+        File file = new File(context.getFilesDir(),FILE_NAME);
+        if(file.exists()) {
+            FileInputStream fis = null;
+            try {
+                fis = context.openFileInput(FILE_NAME);
+                InputStreamReader isr = new InputStreamReader(fis);
+                BufferedReader br = new BufferedReader(isr);
+                StringBuilder sb = new StringBuilder();
+                String text;
 
-            while ((text = br.readLine()) != null) {
-                List<String> userlist = Arrays.asList(text.split(","));
-                InsuranceType type = InsuranceType.valueOf(InsuranceType.class, userlist.get(3));
-                addUser(userlist.get(0), userlist.get(1), userlist.get(2), type, userlist.get(4));
-            }
+                while ((text = br.readLine()) != null) {
+                    List<String> userlist = Arrays.asList(text.split(","));
+                    InsuranceType type = InsuranceType.valueOf(InsuranceType.class, userlist.get(3));
+                    addUserToDB(userlist.get(0), userlist.get(1), userlist.get(2), type, userlist.get(4));
+                }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
 
-            if (fis != null) {
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+        }else{
+        //prevent empty access to file
         }
     }
 
