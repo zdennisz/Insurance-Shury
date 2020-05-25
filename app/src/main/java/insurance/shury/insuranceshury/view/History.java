@@ -33,6 +33,9 @@ public class History extends AppCompatActivity implements MyRecyclerViewAdapter.
 
     }
 
+    public void onBackPressed(){
+        finish();
+    }
     //open the alert dialog
     @Override
     public void onItemClick(View view, int position) {

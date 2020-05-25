@@ -38,14 +38,13 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, BuyInsurance.class));
-                //finish();
+
             }
         });
         viewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Home.this, History.class));
-               // finish();
 
             }
         });

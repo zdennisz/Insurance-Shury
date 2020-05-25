@@ -132,7 +132,7 @@ public class BuyInsurance extends AppCompatActivity {
                     apControl.saveToFile(firstName, lastName, date, type, remarks);
 
                     startActivity(new Intent(BuyInsurance.this, Home.class));
-                    //finish();
+                    finish();
 
                 }
 
