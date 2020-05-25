@@ -12,9 +12,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import insurance.shury.insuranceshury.R;
 import insurance.shury.insuranceshury.control.appController;
@@ -38,6 +41,7 @@ public class BuyInsurance extends AppCompatActivity {
     private String remarks;
     private Boolean checkedOne = false;
     private Context context;
+    private TextView tv_designedCreated;
     appController apControl=new appController();
 
 
@@ -48,7 +52,7 @@ public class BuyInsurance extends AppCompatActivity {
         apControl.setContext(getApplicationContext());
 
         initBuyInsuranceView();
-
+        parseDesignerCreator();
         et_date.setInputType(InputType.TYPE_NULL);
         et_date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +139,17 @@ public class BuyInsurance extends AppCompatActivity {
             }
         });
     }
-
+    public void parseDesignerCreator() {
+        String names = "";
+        HashMap<Integer, String> designerCreator;
+        designerCreator =  apControl.getDesignerCreator();
+        for (Map.Entry<Integer, String> entry : designerCreator.entrySet()) {
+            String value = entry.getValue();
+            names += value + "\n";
+        }
+        names = names.substring(0, names.length() - 1);
+        tv_designedCreated.setText(names);
+    }
 
     public void initBuyInsuranceView() {
 
@@ -148,7 +162,7 @@ public class BuyInsurance extends AppCompatActivity {
         disabilityInsurance = findViewById(R.id.switch_disabilityInsurance);
         apartamentInsurance = findViewById(R.id.switch_apartamentInssurance);
         addInsuranceButton = findViewById(R.id.addInsurance_btn);
-
+        tv_designedCreated=findViewById(R.id.designedCreated_tv);
     }
 
 

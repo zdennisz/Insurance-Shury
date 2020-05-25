@@ -21,8 +21,11 @@ import java.util.Map;
 
 import android.util.JsonWriter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import insurance.shury.insuranceshury.model.DB;
-import insurance.shury.insuranceshury.model.Developer;
 import insurance.shury.insuranceshury.model.Insurance;
 import insurance.shury.insuranceshury.model.InsuranceType;
 import insurance.shury.insuranceshury.model.PersonalInsurance;
@@ -156,81 +159,34 @@ public class appController {
     }
 
     public void importDesingerCreator() {
-        //access sharedprefrences
-        //save data in this db
-        // dbInstance.setDesignedCreatedHashMap();
-        //designedCreatedHashMap -load from file
-    }
+       String json;
+        HashMap<Integer,String> desingerCreator=new HashMap<Integer, String>();
+        try{
+           //read from the file
+           InputStream is=context.getAssets().open(FILE_DEVELOPERS);
+           //gets the size of the file
+           int size=is.available();
+           //allocates array according to file size
+           byte[] buffer=new byte[size];
+           //read the file into buffer
+           is.read(buffer);
+           //closes the data stream
+            is.close();
+           //convert buffer to string
+            json=new String(buffer,"UTF-8");
+           //convert the string to array of json objects
+           JSONObject obj=new JSONObject(json);
+           desingerCreator.put(0,"Version "+(obj.getString("version")));
+           desingerCreator.put(1,"Designed & Developed by:");
+           desingerCreator.put(2,obj.getString("student_name_1"));
+           desingerCreator.put(3,obj.getString("student_name_2"));
 
-
-    //-------------------------------- Developer JSON Writer -------------------------------------
-
-    public void writeJsonStream(OutputStream out, List<Developer> developers) throws IOException {
-        JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
-        writer.setIndent("  ");
-        writeMessagesArray(writer, developers);
-        writer.close();
-    }
-
-    public void writeMessagesArray(JsonWriter writer, List<Developer> developers) throws IOException {
-        writer.beginArray();
-        for (Developer d : developers) {
-            writeMessage(writer, d);
+       }catch (IOException ex){
+           ex.printStackTrace();
+       } catch (JSONException e) {
+            e.printStackTrace();
         }
-        writer.endArray();
+         dbInstance.setDesignedCreatedHashMap(desingerCreator);
+
     }
-
-    public void writeMessage(JsonWriter writer, Developer developer) throws IOException {
-        writer.beginObject();
-
-        writer.name("name");
-        writeDeveloper(writer, developer);
-        writer.endObject();
-    }
-
-    public void writeDeveloper(JsonWriter writer, Developer developer) throws IOException {
-        writer.beginObject();
-        writer.name("name").value(developer.getName());
-        writer.endObject();
-    }
-
-
-    //-------------------------------- Developer JSON Reader -------------------------------------
-
-    public List<Developer> readJsonStream(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
-            return readDevelopersArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    public List<Developer> readDevelopersArray(JsonReader reader) throws IOException {
-        List<Developer> developers = new ArrayList<Developer>();
-
-        reader.beginArray();
-        while (reader.hasNext()) {
-            developers.add(readDeveloper(reader));
-        }
-        reader.endArray();
-        return developers;
-    }
-
-    public Developer readDeveloper(JsonReader reader) throws IOException {
-        String developerName = null;
-
-        reader.beginObject();
-        while (reader.hasNext()) {
-            String name = reader.nextName();
-            if (name.equals("id")) {
-
-                developerName = reader.nextString();
-            }
-        }
-        reader.endObject();
-        return new Developer(developerName);
-    }
-
-
 }

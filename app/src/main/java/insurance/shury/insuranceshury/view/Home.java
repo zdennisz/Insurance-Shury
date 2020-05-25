@@ -29,11 +29,11 @@ public class Home extends AppCompatActivity {
         apControl.setContext(getApplicationContext());
         apControl.importUsers();
         //import designer and creator tag
-        //apControl.importDesingerCreator();
+        apControl.importDesingerCreator();
         buyBtn = findViewById(R.id.buy_Btn);
         viewBtn = findViewById(R.id.view_Btn);
         designerCreatorTv = findViewById(R.id.designedCreated_tv);
-        //parseDesignerCreator();
+        parseDesignerCreator();
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +60,7 @@ public class Home extends AppCompatActivity {
             String value = entry.getValue();
             names += value + " \n";
         }
+        names = names.substring(0, names.length() - 1);
         designerCreatorTv.setText(names);
     }
 
