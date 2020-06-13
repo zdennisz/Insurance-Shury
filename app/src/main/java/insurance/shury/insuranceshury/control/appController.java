@@ -105,7 +105,7 @@ public class appController {
             fos.write(comma.getBytes());
             fos.write(remarks.getBytes());
             fos.write(endOfLine.getBytes());
-            Toast.makeText(context, "Saved to " + context.getFilesDir() + "/" + FILE_NAME, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Saved to data/data/insurance.shury.insuranceshury/files/"  + FILE_NAME, Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
 
         } catch (IOException e) {
