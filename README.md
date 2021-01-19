@@ -1,4 +1,4 @@
-Insurance Company App<br/>
+Insurance Company App :globe_with_meridians:<br/>
 App for a school course :school_satchel: which helps you buy insurances and shows all the purchases of the past.<br/><br/> 
 Language : `JAVA`<br/><br/>
 Design-Patterns: `MVC` , `Adapter` ,`Singelton`<br/><br/>
