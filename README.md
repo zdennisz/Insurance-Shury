@@ -1,6 +1,6 @@
 # Insurance Company App :globe_with_meridians:
 
-**Insurance Shury** is a *mobile app* which helps you buy insurances and shows all the purchases of the past.
+**Insurance Shury** is a *mobile app* which helps you buy insurances and shows all the purchases of the past, developed as part of an academic course.
 
 - The app was **written** in `Java` for `Android` devices. 📱
 
