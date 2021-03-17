@@ -5,7 +5,7 @@
 - The app was **written** in `Java` for `Android` devices. 📱
 
 
-- It includes **design patterns** 📓 such as `MVC`, `Adapter` & `Singletone`.
+- It includes **design patterns** 📓 such as `MVC`, `Adapter` & `Singleton`.
 
 
 - The **development time** took 3 days long.:hourglass_flowing_sand:
